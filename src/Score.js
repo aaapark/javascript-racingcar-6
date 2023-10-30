@@ -1,23 +1,39 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import User from './UserInput.js'
 
 export default class Score {
 
-    playGame(count) {
-        console.log(count)
-        // for(i =0 ; i < count ; i ++) {
-        //     this.getScore()
-        }
-    
+    playGame(count,name) {
+        // console.log(count)
+        MissionUtils.Console.print('실행결과')
+        for(let i = 0 ; i < count ; i ++) {
+            this.getScore(name);
+        } this.getWinner(name)
 
-    getScore() {
+    }
+
+    getScore(name) {
         let currentScore =''
-        this.car.forEach((element) => {
+        this.totalScore = ''
+        
+        name.forEach((element) => {
             if(MissionUtils.Random.pickNumberInRange(1, 9) >= 4) {
                 element.score += '-'
-            } 
-            currentScore = `${element.score}`
+            }
+            currentScore += `${element.name }: ${element.score} \n`;
+            this.totalScore += `${element.name}: ${element.score.length} \n`;
         })
         MissionUtils.Console.print(currentScore)
-    }s
+    }
+    
+    getWinner(name) {
+        MissionUtils.Console.print(name)
+
+        let checkScore = []
+        name.map((element) => {
+            checkScore.push(element.name, element.score)
+        });
+        MissionUtils.Console.print(checkScore)
+
+
+    }
 }

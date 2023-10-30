@@ -1,22 +1,25 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import Validation from './Validation.js'
+import Save from './ValueSave.js'
 import Score from "./Score.js";
 
 
 export default class User {
     async userInputCarName() {
         const inputCarName = await MissionUtils.Console.readLineAsync(
-            '경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분) : ').then(
+            '경주할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분) : \n').then(
             (value) => value
         )                  
         this.getCarNames(inputCarName)
     }
 
     getCarNames(userInput) {
-        let cars = [];
+        this.cars = [];
         let names = userInput.split(',');
-        names.map((element) => {cars.push((element))});
-        
+        names.map((element) => {
+            this.cars.push(new Save(element))
+        });
+
         this.checkName(names)
         this.userInputPlayNumber()
     }  
@@ -28,40 +31,19 @@ export default class User {
           throw e
         }
         MissionUtils.Console.print(names)
-
     }
 
     async userInputPlayNumber() {
         const inputPlayNumer = await MissionUtils.Console.readLineAsync(
-            '시도할 횟수는 몇 회인가요?').then(
+            '시도할 횟수는 몇 회인가요? \n').then(
             (value) => value
         )
         try {
             Validation.checkPlayNumber(inputPlayNumer)
         } catch(e) {
           throw(e)
-        }          
-        MissionUtils.Console.print(inputPlayNumer)
-        const count = Score.playGame(inputPlayNumer) // 이거 왜 실행이 안될까,,,?
-        console.log(count)
-    }
-
-  
+        }         
+        let score = new Score
+        score.playGame(inputPlayNumer,this.cars)
+    } 
 }
-
-// const inputcarname = new CarName();
-// inputcarname.userInputCarName();
-
-
-// export function checkingScore (computerInputNumber, userInputNumbers) {
-//     let strike = 0;
-//     let ball = 0
-//     for (let i = 0; i <3; i++) {
-//         if (computerInputNumber[i] === userInputNumbers[i]) {
-//             strike += 1;
-//         }
-//         else if (computerInputNumber.includes(userInputNumbers[i])) {
-//             ball += 1;
-//         }
-//     }
-//     return {strike, ball}

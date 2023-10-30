@@ -50,3 +50,8 @@ control: 입력값 받아서 모델에 전달
 promp
 yei
 
+6. 승자
+승자 목록을 array로 만들고
+array.length가 1이면 단독승자
+array.length가 1이상이면 공동우승 (map. join(,) 사용하기)
+
