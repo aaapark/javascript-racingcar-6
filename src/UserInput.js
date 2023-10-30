@@ -7,9 +7,8 @@ import Score from "./Score.js";
 export default class User {
     async userInputCarName() {
         const inputCarName = await MissionUtils.Console.readLineAsync(
-            '경주할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분) : \n').then(
-            (value) => value
-        )                  
+            '경주할 자동차 이름을 입력하세요. (이름은 쉼표(,) 기준으로 구분) : \n'
+        )
         this.getCarNames(inputCarName)
     }
 
@@ -30,13 +29,12 @@ export default class User {
         } catch(e) {
           throw e
         }
-        MissionUtils.Console.print(names)
+        // MissionUtils.Console.print(names)
     }
 
     async userInputPlayNumber() {
         const inputPlayNumer = await MissionUtils.Console.readLineAsync(
-            '시도할 횟수는 몇 회인가요? \n').then(
-            (value) => value
+            '시도할 횟수는 몇 회인가요? \n'
         )
         try {
             Validation.checkPlayNumber(inputPlayNumer)
