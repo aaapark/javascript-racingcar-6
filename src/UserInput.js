@@ -42,7 +42,7 @@ export default class User {
           throw(e)
         }          
         MissionUtils.Console.print(inputPlayNumer)
-        const count = Score.playGame(inputPlayNumer)
+        const count = Score.playGame(inputPlayNumer) // 이거 왜 실행이 안될까,,,?
         console.log(count)
     }
 
